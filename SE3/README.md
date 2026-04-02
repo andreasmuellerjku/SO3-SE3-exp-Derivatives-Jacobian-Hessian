@@ -49,7 +49,68 @@ Hinverse = SE3Inverse[H];
 Chop[Hinverse.H - IdentityMatrix[4], SE3EPS]  (* 0 *)
 ```
 
+# SE3PExp
+
+Wolfram Language package for numerically stable computations on the rigid‑body group SE(3) using canonical coordinates and the semi‑direct product block structure SE(3) = SO(3) ⋉ ℝ³. Implements exponential/logarithm maps for twists, the differential of the exponential (dexp), its inverse, and first derivatives, by leveraging SO(3) building blocks.
+
+- Author: Andreas Mueller
+- Created: 2 Jan 2005
+- Updated: 1 Apr 2026
+- Depends on: SO3Core, SO3Exp, SE3Core
+
+## Features
+
+- `SE3PExp[X, eps]`: homogeneous transform $H=\exp(\widehat{X})$ for screw coordinates $X=\{x,y\}\in\mathbb{R}^6$; small‑angle threshold `eps` (default `SE3EPS`).
+- `SE3PLog[H, eps]`: screw coordinates $X$ with $H=\exp(\widehat{X})$; uses block structure with SO(3) log and dexp inverse.
+- `SE3Pdexp[X, eps]`: right-trivialized differential dexp of $exp$ at $X$ computed using the $3\times 3$ block partitioning.
+- `SE3PdexpInv[X, eps]`: inverse $\mathrm{dexp}^{-1}_X$ of $exp_X$.
+- `SE3PDdexp[X, U, eps]`: Frechet derivative $D_X(\mathrm{dexp})(U)$ of $\mathrm{dexp}$ at $X$ along $U$.
+- `SE3PDdexpInv[X, U, eps]`: Frechet derivative $D_X(\mathrm{dexp}^{-1})(U)$ of of $\mathrm{dexp}^{-1}$ at $X$.
+
+## Install
+
+Place `SO3Core.m`, `SO3Exp.m`, `SE3Core.m`, and `SE3PExp.m` on your `$Path` (e.g., `~/Library/Mathematica/Applications/`, `~/.Mathematica/Applications/`, or `%AppData%\Mathematica\Applications\`), then:
+
+```wl
+<< SO3Core`
+<< SO3Exp`
+<< SE3Core`
+<< SE3PExp`
+```
+
+## Usage
+
+```wl
+<< SO3Core`
+<< SO3Exp`
+<< SE3Core`
+<< SE3PExp`
+
+X = {0.1, -0.2, 0.05,  1.0, 0.3, -0.4};  (* twist {x, y} *)
+
+(* Exponential and logarithm *)
+H = SE3PExp[X];
+Xrec = se3ToTwist @ SE3PLog[H];          (* ≈ X *)
+
+(* dexp and its inverse *)
+J   = SE3Pdexp[X];
+Jinv = SE3PdexpInv[X];
+Chop[J . Jinv - IdentityMatrix[6], SE3EPS]  (* 0 *)
+
+(* Derivatives *)
+U = {0.02, 0.01, 0.0,  -0.05, 0.02, 0.01};
+D1  = SE3PDdexp[X, U];
+D1i = SE3PDdexpInv[X, U];
+```
+
+For $x\in\mathbb{R}^3$ with $n=\|x\|$, the rotation and translation blocks are computed via SO(3) sinc‑based formulas; for small $n$, the `eps` threshold avoids numerical issues.
+
 ## Notes
 
-- Inputs are not shape‑validated; ensure twists are length‑6, rotations are $3\times 3$, and transforms are $4\times 4$.
+- Inputs are not shape‑validated; ensure twists are length‑6 and transforms are $4\times 4$ SE(3) elements.
 - Works with numeric or symbolic data. Use `Chop[..., SE3EPS]` to suppress floating‑point noise.
+
+## References
+
+- A. Mueller, Review of the exponential and Cayley map on SE(3) as relevant for Lie group integration…, Proc. Royal Soc. A, 2021. doi: 10.1098/rspa.2021.0303
+- Preprint: https://arxiv.org/abs/2303.07928
