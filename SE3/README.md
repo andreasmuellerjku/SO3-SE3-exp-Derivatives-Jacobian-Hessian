@@ -122,6 +122,8 @@ Wolfram Language package for computing on SE(3) using canonical coordinates with
 - `SE3dexpInv[X, eps]`: inverse of $dexp$ on $SE(3)$
 - `SE3Ddexp[X, U, eps]`: Fréchet derivative $D_X(\mathrm{dexp})(U)$ of $dexp$ at $X$ along $U$.
 - `SE3DdexpInv[X, U, eps]`: Fréchet derivative $D_X(\mathrm{dexp}^{-1})(U)$ of $dexp^{-1}$ at $X$ along $U$.
+- `SE3D2dexp[X, U, S, eps]`: Second Fréchet derivative $D^2_X(\mathrm{dexp})(U)(S)$ of $dexp$ at $X$.
+- `SE3D2dexpInv[X, U, S, eps]`: Second Fréchet derivative $D^2_X(\mathrm{dexp}^{-1})(U)(S)$ of $dexp^{-1}$ at $X$.
 
 Jacobians and Hessians:
 - `SE3dexpJac[X, Z, eps]`, `SE3dexpInvJac[X, Z, eps]`, `SE3dexpJacTranspose[X, Z, eps]`
