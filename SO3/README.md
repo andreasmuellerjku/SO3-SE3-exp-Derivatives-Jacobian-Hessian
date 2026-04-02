@@ -100,5 +100,6 @@ D2inv = SO3D2dexpInv[x, y, u, v];
 
 ## References
 
-- A. Mueller: Review of the exponential and Cayley map on SE(3) as relevant for Lie group integration of the generalized Poisson equation and flexible multibody systems,  Proc. Royal Soc. A, September 2021; 477 (2253): 20210303 https://doi.org/10.1098/rspa.2021.0303
-- Corrected preprint: https://arxiv.org/abs/2303.07928
+- A. Mueller: Review of the exponential and Cayley map on SE(3) as relevant for Lie group integration of the generalized Poisson equation and flexible multibody systems,  Proc. Royal Soc. A, September 2021; 477 (2253): 20210303.
+https://doi.org/10.1098/rspa.2021.0303
+Corrected preprint: https://arxiv.org/abs/2303.07928
