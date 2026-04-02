@@ -74,7 +74,7 @@ x = {0.1, -0.2, 0.05};
 
 (* Exponential and logarithm *)
 R = SO3Exp[x];
-SO3Log[R]                (* ≈ x *)
+x == SO3Log[R]
 
 (* dexp and its inverse *)
 J  = SO3dexp[x];
