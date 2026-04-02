@@ -98,8 +98,9 @@ D1inv = SE3PDdexpInv[X, U];
 
 ## References
 
-- A. Mueller: Review of the exponential and Cayley map on SE(3) as relevant for Lie group integration of the generalized Poisson equation and flexible multibody systems,  Proc. Royal Soc. A, September 2021; 477 (2253): 20210303 https://doi.org/10.1098/rspa.2021.0303
-- Corrected preprint: https://arxiv.org/abs/2303.07928
+- A. Mueller: Review of the exponential and Cayley map on SE(3) as relevant for Lie group integration of the generalized Poisson equation and flexible multibody systems,  Proc. Royal Soc. A, September 2021; 477 (2253): 20210303.
+https://doi.org/10.1098/rspa.2021.0303
+Corrected preprint: https://arxiv.org/abs/2303.07928
 
 
 # SE3Exp (Adjoint Representation)
@@ -205,3 +206,11 @@ D22 = SE3D2dexpOrder2[X, U, S];
 
 - Inputs are not shape‑validated.
 - Works with numeric or symbolic data. Use `Chop[..., SE3EPS]` to suppress floating‑point noise.
+
+## References
+
+[1] A. Mueller: Closed Form Relations and Higher-Order Approximations of First and Second Derivatives of the Tangent Operator on SE(3), ZAMM - Journal of Applied Mathematics and Mechanics / Zeitschrift für Angewandte Mathematik und Mechanik, 2026, in press
+
+[2] A. Mueller: Review of the exponential and Cayley map on SE(3) as relevant for Lie group integration of the generalized Poisson equation and flexible multibody systems,  Proc. Royal Soc. A, September 2021; 477 (2253): 20210303.
+https://doi.org/10.1098/rspa.2021.0303
+Corrected preprint: https://arxiv.org/abs/2303.07928
