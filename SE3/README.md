@@ -126,15 +126,22 @@ Wolfram Language package for computing on SE(3) using canonical coordinates with
 - `SE3D2dexpInv[X, U, S, eps]`: Second Fréchet derivative $D^2_X(\mathrm{dexp}^{-1})(U)(S)$ of $dexp^{-1}$ at $X$.
 
 Jacobians and Hessians:
-- `SE3dexpJac[X, Z, eps]`, `SE3dexpInvJac[X, Z, eps]`, `SE3dexpJacTranspose[X, Z, eps]`
-- `SE3dexpHessian[X, Q, Z, eps]`, `SE3dexpInvHessian[X, Q, Z]`
-- `SE3dexpHessianSwitchOrder2[X, Q, Z, eps]`: switch to exact Hessian when $\|x\|>\text{eps}$, else use order‑2 series.
+- `SE3dexpJac[X, Z, eps]`: Jacobian of $dexp_X Z$ w.r.t. $X$.
+- `SE3dexpInvJac[X, Z, eps]`: Jacobian of $dexp^{-1}_XZ$ w.r.t. $X$.
+- `SE3dexpJacTranspose[X, Z, eps]`: Jacobian of $dexp^T_XZ$ w.r.t. $X$.
+- `SE3dexpHessian[X, Q, Z, eps]`: Hessian of $Q^T dexp_X Z$ w.r.t. $X$.
+- `SE3dexpInvHessian[X, Q, Z]`: Hessian of $Q^T dexp^{-1}_X Z$ w.r.t. $X$.
 
 Series/truncated approximations (useful for very small $\|x\|$):
-- `SE3dexpOrder{k}[X]`, `SE3dexpInvOrder{k}[X]` for $k=1..4$
-- `SE3DdexpOrder{0|1|2|3}[X, U]`, `SE3DdexpInvOrder{0|1|2|3}[X, U]`
-- `SE3D2dexpOrder{0|1|2}[X, U, S]`, `SE3D2dexpInvOrder{0|2}[X, U, S]`
-- `SE3dexpJacOrder{0|1|2}[X, Z]`, `SE3dexpHessianOrder{0|1|2}[X, Q, Z]`
+- `SE3dexpOrder1[X]`,`SE3dexpOrder2[X]`,`SE3dexpOrder3[X]`,`SE3dexpOrder4[X]`: Approximation of $dexp$ of order $1,\ldots,4$.
+- `SE3dexpInvOrder1[X]`,`SE3dexpInvOrder2[X]`,`SE3dexpInvOrder3[X]`,`SE3dexpInvOrder4[X]`: Approximation of $dexp^-1$ of order $1,\ldots,4$.
+- `SE3DdexpOrder0[X, U]`,`SE3DdexpOrder1[X, U]`,`SE3DdexpOrder2[X, U]`,`SE3DdexpOrder3[X, U]`: Approximation of $D_X(dexp)(U)$ of order $0,\ldots,3$.
+- `SE3DdexpInvOrder0[X, U]`,`SE3DdexpInvOrder1[X, U]`,`SE3DdexpInvOrder2[X, U]`,`SE3DdexpInvOrder3[X, U]`: Approximation of $D_X(dexp^{-1})(U)$ of order $0,\ldots,3$.
+- `SE3D2dexpOrder0[X, U, S]`,`SE3D2dexpOrder1[X, U, S]`,`SE3D2dexpOrder2[X, U, S]`: Approximation of $D^2_X(dexp)(U)(S)$ of order $0,1,2$.
+- `SE3D2dexpInvOrder0[X, U, S]`,`SE3D2dexpInvOrder2[X, U, S]`: Approximation of $D^2_X(dexp^{-1})(U)(S)$ of order $0,2$.
+- `SE3dexpJacOrder0[X, Z]`,`SE3dexpJacOrder1[X, Z]`,`SE3dexpJacOrder2[X, Z]`: Approximation of the Jacobian of $dexp_XZ$ of order $0,1,2$.
+- `SE3dexpHessianOrder0[X, Q, Z]`,`SE3dexpHessianOrder1[X, Q, Z]`,`SE3dexpHessianOrder2[X, Q, Z]`: Approximation of the Hessian of $Q^T dexp_XZ$ of order $0,1,2$.
+- `SE3dexpHessianSwitchOrder2[X, Q, Z, eps]`: switch to exact Hessian when $\|x\|>\text{eps}$, else use order‑2 series.
 
 Utilities:
 - `SE3adBarMatrix[X]`: skew‑symmetric 6×6 matrix such that $\mathrm{adBar}_X\,U = \mathrm{ad}_U^\top X$.
