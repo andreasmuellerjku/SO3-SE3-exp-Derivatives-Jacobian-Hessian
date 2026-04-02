@@ -46,11 +46,11 @@ Wolfram Language package for fast, numerically stable computations on the rotati
 - `SO3Exp[x]`: rotation matrix $R = \exp(\tilde{x})$ using a branch-free, sinc-based Rodrigues form.
 - `SO3Log[R, eps]`: rotation vector $x$ with $R=\exp(\tilde{x})$; small-angle threshold `eps` (default `SO3EPS`).
 - `SO3dexp[x, eps]`: right-trivialized differential of dexp at $x$.
-- `SO3dexpInv[x, eps]`: inverse $(\mathrm{dexp}_x)^{-1}$.
+- `SO3dexpInv[x, eps]`: right-trivialized differential of $(\mathrm{dexp}_x)^{-1}$ at $x$.
 - `SO3Ddexp[x, y, eps]`: Fréchet derivative $D_x(\mathrm{dexp})(y)$ of dexp at $x$ along $y$.
-- `SO3D2dexp[x, y, u, v, eps]`: D derivative $D_X(\mathrm{Ddexp})(U)$ of $\mathrm{Ddexp}(X):=(D_x\mathrm{dexp})(y)$ at $X=(x,y)$.
-- `SO3DdexpInv[x, y, eps]`: derivative of $\mathrm{dexp}^{-1}$ at $x$.
-- `SO3D2dexpInv[x, y, u, v, eps]`: second derivative of $\mathrm{dexp}^{-1}$ at $x$.
+- `SO3DdexpInv[x, y, eps]`: Fréchet derivative $D_x(\mathrm{dexp}^{-1})(y)$ of dexp at $x$ along $y$.
+- `SO3D2dexp[x, y, u, v, eps]`: derivative $D_X(\mathrm{Ddexp})(U)$ of $\mathrm{Ddexp}(X):=(D_x\mathrm{dexp})(y)$ at $X=(x,y)$ along $U=(u,v)$.
+- `SO3D2dexpInv[x, y, u, v, eps]`: derivative $D_X(\mathrm{Ddexp}^{-1})(U)$ of $\mathrm{Ddexp^{-1}}(X):=(D_x\mathrm{dexp}^{-1})(y)$ at $X=(x,y)$ along $U=(u,v)$.
 
 All functions accept symbolic or numeric inputs; small-angle handling governed by `eps` (default `SO3EPS = 1.*^-12`).
 
@@ -91,12 +91,6 @@ D2  = SO3D2dexp[x, y, u, v];
 D2i = SO3D2dexpInv[x, y, u, v];
 ```
 
-Mathematical form (rotation vector $x$, norm $n=\|x\|$):
-$$
-\exp(\tilde{x}) = I + \mathrm{sinc}(n)\,\tilde{x} + \tfrac12\,\mathrm{sinc}^2\!\left(\tfrac{n}{2}\right)\tilde{x}^2,
-\quad \mathrm{sinc}(t)=\frac{\sin t}{t}.
-$$
-
 ## Notes
 
 - Inputs are not shape‑validated; ensure vectors are length‑3 and matrices are valid rotations when using `SO3Log`.
@@ -104,5 +98,5 @@ $$
 
 ## References
 
-- A. Mueller, Review of the exponential and Cayley map on SE(3) as relevant for Lie group integration..., Proc. Royal Soc. A, 2021. doi: 10.1098/rspa.2021.0303
-- Preprint: https://arxiv.org/abs/2303.07928
+- A. Mueller: Review of the exponential and Cayley map on SE(3) as relevant for Lie group integration of the generalized Poisson equation and flexible multibody systems,  Proc. Royal Soc. A, September 2021; 477 (2253): 20210303 https://doi.org/10.1098/rspa.2021.0303
+- Corrected preprint: https://arxiv.org/abs/2303.07928
