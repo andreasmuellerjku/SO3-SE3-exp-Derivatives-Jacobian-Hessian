@@ -95,10 +95,6 @@ U = {0.02, 0.01, 0.0,  -0.05, 0.02, 0.01};
 D1  = SE3PDdexp[X, U];
 D1inv = SE3PDdexpInv[X, U];
 ```
-## Notes
-
-- Inputs are not shape‑validated; ensure twists are length‑6 and transforms are $4\times 4$ SE(3) elements.
-- Works with numeric or symbolic data. Use `Chop[..., SE3EPS]` to suppress floating‑point noise.
 
 ## References
 
@@ -132,7 +128,7 @@ Jacobians and Hessians:
 - `SE3dexpHessian[X, Q, Z, eps]`: Hessian of $Q^T dexp_X Z$ w.r.t. $X$.
 - `SE3dexpInvHessian[X, Q, Z]`: Hessian of $Q^T dexp^{-1}_X Z$ w.r.t. $X$.
 
-Series/truncated approximations (useful for very small $\|x\|$):
+Series/truncated approximations (useful for small $\|x\|$):
 - `SE3dexpOrder1[X]`,`SE3dexpOrder2[X]`,`SE3dexpOrder3[X]`,`SE3dexpOrder4[X]`: Approximation of $dexp$ of order $1,\ldots,4$.
 - `SE3dexpInvOrder1[X]`,`SE3dexpInvOrder2[X]`,`SE3dexpInvOrder3[X]`,`SE3dexpInvOrder4[X]`: Approximation of $dexp^-1$ of order $1,\ldots,4$.
 - `SE3DdexpOrder0[X, U]`,`SE3DdexpOrder1[X, U]`,`SE3DdexpOrder2[X, U]`,`SE3DdexpOrder3[X, U]`: Approximation of $D_X(dexp)(U)$ of order $0,\ldots,3$.
@@ -153,18 +149,12 @@ Small‑angle handling uses `eps` (default `SE3EPS` from SE3Core`).
 Place `SO3Core.m`, `SO3Exp.m`, `SE3Core.m`, and `SE3Exp.m` (this file) on your `$Path`, then:
 
 ```wl
-<< SO3Core`
-<< SO3Exp`
-<< SE3Core`
 << SE3Exp`
 ```
 
 ## Usage
 
 ```wl
-<< SO3Core`
-<< SO3Exp`
-<< SE3Core`
 << SE3Exp`
 
 X = {0.1, -0.2, 0.05,  1.0, 0.3, -0.4};   (* twist {x,y} *)
@@ -175,12 +165,18 @@ H = SE3Exp[X];
 (* dexp and its inverse (6×6) *)
 J   = SE3dexp[X];
 Jinv = SE3dexpInv[X];
-Chop[J . Jinv - IdentityMatrix[6], SE3EPS]    (* 0 *)
+Chop[J . Jinv - IdentityMatrix[6], SE3EPS]
 
 (* First derivative along U *)
 U = {0.02, 0.01, 0.0, -0.05, 0.02, 0.01};
 D1  = SE3Ddexp[X, U];
-D1i = SE3DdexpInv[X, U];
+D1iinv = SE3DdexpInv[X, U];
+
+(* Second derivative along U, S *)
+U = {0.02, 0.01, 0.0, -0.05, 0.02, 0.01};
+S = {1.7, -2.9, -9.2, 7.6, 6.7, 2.4};
+D2  = SE3Ddexp[X, U, S];
+D2iinv = SE3DdexpInv[X, U, S];
 
 (* Jacobian and Hessian examples *)
 Z   = {0.1, 0.0, -0.1, 0.2, -0.1, 0.0};
@@ -188,10 +184,24 @@ Q   = RandomReal[{-1,1}, 6];
 Jxz = SE3dexpJac[X, Z];
 Hzz = SE3dexpHessian[X, Q, Z];
 
-(* Small-angle series as a fallback/check *)
+(* Approximations *)
+Js1 = SE3dexpOrder1[X];
 Js2 = SE3dexpOrder2[X];
+Js3 = SE3dexpOrder3[X];
+Js4 = SE3dexpOrder4[X];
+
+D10 = SE3DdexpOrder0[X, U, S];
+D11 = SE3DdexpOrder1[X, U, S];
+D12 = SE3DdexpOrder2[X, U, S];
+D13 = SE3DdexpOrder3[X, U, S];
+
+D20 = SE3D2dexpOrder0[X, U, S];
+D21 = SE3D2dexpOrder1[X, U, S];
+D22 = SE3D2dexpOrder2[X, U, S];
+
 ```
 
-Notes:
-- Inputs are not shape‑validated; ensure twists are length‑6 and transforms are $4\times 4$.
-- Works with numeric or symbolic data. For very small $\|x\|$, prefer the provided series or use the `eps` threshold; use `Chop[..., SE3EPS]` to suppress numerical noise.
+## Notes
+
+- Inputs are not shape‑validated.
+- Works with numeric or symbolic data. Use `Chop[..., SE3EPS]` to suppress floating‑point noise.
