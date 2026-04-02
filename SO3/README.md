@@ -83,12 +83,13 @@ Chop[J . Jinv - IdentityMatrix[3], SO3EPS]  (* 0 *)
 (* First derivative of dexp along y *)
 y = {0.3, 0.2, -0.1};
 D1 = SO3Ddexp[x, y];
+D1inv = SO3DdexpInv[x, y];
 
-(* Second derivative examples *)
+(* Second derivatives *)
 u = {0.1, 0.0, 0.2};
 v = {-0.05, 0.02, 0.03};
 D2  = SO3D2dexp[x, y, u, v];
-D2i = SO3D2dexpInv[x, y, u, v];
+D2inv = SO3D2dexpInv[x, y, u, v];
 ```
 
 ## Notes
