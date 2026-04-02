@@ -38,7 +38,8 @@ X.y == Cross[x, y]        (* True *)
 Wolfram Language package for fast, numerically stable computations on the rotation group SO(3) using canonical coordinates (rotation vectors). Provides exponential/logarithm maps and the differential of the exponential (dexp), its inverse, and first/second Fréchet derivatives, implemented via sinc-based closed forms.
 
 - Author: Andreas Mueller
-- Created: 2 Jan 2005 • Updated: 1 Apr 2026
+- Created: 2 Jan 2005
+- Updated: 1 Apr 2026
 - Depends on: SO3Core`
 
 ## Features
