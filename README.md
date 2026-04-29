@@ -4,7 +4,7 @@
 
 #### This implements all formulae that were reported in the following publications:
 
-[1] A. Mueller: Closed Form Relations and Higher-Order Approximations of First and Second Derivatives of the Tangent Operator on SE(3), ZAMM - Journal of Applied Mathematics and Mechanics / Zeitschrift für Angewandte Mathematik und Mechanik, 2026, in press
+[1] A. Mueller: Closed Form Relations and Higher-Order Approximations of First and Second Derivatives of the Tangent Operator on SE(3), ZAMM - Journal of Applied Mathematics and Mechanics / Zeitschrift für Angewandte Mathematik und Mechanik, 2026, https://onlinelibrary.wiley.com/doi/10.1002/zamm.70432
 
 [2] A. Mueller: Review of the exponential and Cayley map on SE(3) as relevant for Lie group integration of the generalized Poisson equation and flexible multibody systems,  Proc. Royal Soc. A, September 2021; 477 (2253): 20210303. 
 https://doi.org/10.1098/rspa.2021.0303
